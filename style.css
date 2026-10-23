@@ -1,0 +1,31 @@
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+canvas {
+  display: block;
+}
+
+body{
+  margin: 0;
+  height: 50vh;
+  display: flex;
+  
+  justify-content: center;
+  align-items: center;
+
+}
+
+.grid{
+  display: grid;
+  grid-template-columns: repeat(3, 2fr);
+  gap: 16px;
+  margin: 60px;
+  padding: 40px;
+}
+
+.cell{
+  aspect-ratio: 1;
+  background: #222;
+}
