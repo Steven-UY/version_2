@@ -9,23 +9,41 @@ canvas {
 
 body{
   margin: 0;
-  height: 50vh;
-  display: flex;
-  
-  justify-content: center;
-  align-items: center;
-
+  height: 100vh;
 }
 
-.grid{
+#container-1{
+  display: grid;
+  grid-template-columns: 1fr 2fr 3fr;
+  overflow-x: hidden;
+}
+
+.sketch{
   display: grid;
   grid-template-columns: repeat(3, 2fr);
   gap: 16px;
-  margin: 60px;
-  padding: 40px;
 }
 
 .cell{
   aspect-ratio: 1;
   background: #222;
+}
+
+#container-2{
+  display:grid;
+  grid-template-columns: 1fr 2fr 1fr;
+}
+
+#caffeine-1{
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  margin: 0;
+}
+
+#caffeine-2{
+  position: absolute;
+  top: 45px;
+  left: 30px;
+  margin: 0;
 }
