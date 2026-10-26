@@ -38,5 +38,3 @@ We should pull in an image from taipei story
 
 I need to wrap both grid and text items in a layout container!!!
 Am i serving oui and the work<?>
-
-it's like a bomb in me

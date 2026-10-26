@@ -22,10 +22,10 @@ const template = ({color, biteSize, wave, speed}) => (p) => {
 };
 
 const settings = [
-    {color : "yellow", biteSize : Math.PI / 10, speed: 0.1, wave: "tan" },
+    {color : "yellow", biteSize : Math.PI / 10, speed: 0.03, wave: "tan" },
     {color : "blue", biteSize: Math.PI / 10, speed: 0.05, wave: "sin"},
   ];
-  
+
 const cells = document.querySelectorAll(".cell");
 
 cells.forEach((cell, i) => {
