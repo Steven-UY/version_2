@@ -52,6 +52,49 @@ cells.forEach((cell, i) => {
   new p5(template(settings[i % settings.length], cell), cell);
 });
 
+//addresses from play.c, scattered in the white space around the cells
+const addrCount = 12;
+
+const overlaps = (a, b) =>
+  a.left < b.right && a.right > b.left && a.top < b.bottom && a.bottom > b.top;
+
+const placeAddrs = () => {
+  document.querySelectorAll(".addr").forEach((el) => el.remove());
+
+  const taken = [...cells].map((cell) => {
+    const r = cell.getBoundingClientRect();
+    return { left: r.left, right: r.right, top: r.top + scrollY, bottom: r.bottom + scrollY };
+  });
+  const pageW = document.documentElement.clientWidth;
+  const pageH = Math.max(document.documentElement.scrollHeight, innerHeight);
+
+  for (let k = 0; k < addrCount; k++) {
+    const span = document.createElement("span");
+    span.className = "addr";
+    span.textContent = "0x00000000"; //placeholder to measure size
+    document.body.appendChild(span);
+    const w = span.offsetWidth;
+    const h = span.offsetHeight;
+
+    //try random spots until one is free; drop the span if none is
+    let placed = false;
+    for (let tries = 0; tries < 200 && !placed; tries++) {
+      const x = Math.random() * (pageW - w);
+      const y = Math.random() * (pageH - h);
+      const box = { left: x, right: x + w, top: y, bottom: y + h };
+      if (taken.some((t) => overlaps(box, t))) continue;
+      span.style.left = x + "px";
+      span.style.top = y + "px";
+      taken.push(box);
+      placed = true;
+    }
+    if (!placed) span.remove();
+  }
+};
+
+placeAddrs();
+window.addEventListener("resize", placeAddrs);
+
 /*
 function mySketch(p){
   p.setup = function(){

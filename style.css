@@ -50,3 +50,11 @@ body{
   margin: 0;
   white-space: nowrap;
 }
+
+.addr{
+  position: absolute; /* placed by placeAddrs() in sketch.js */
+  font-family: monospace;
+  font-size: 32px;
+  color: #000;
+  white-space: nowrap;
+}

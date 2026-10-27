@@ -12,7 +12,7 @@ This is a temporary folder that may be cleared, so copy the backup somewhere per
 
 ## 1. Running `play.c` in the browser (WebAssembly)
 
-**Status:** the C code is no longer loaded by the page, at your request. It's kept for another purpose.
+**Status:** the C code is loaded by the page again, through `<script src="play.js"></script>` after `sketch.js` in `index.html`. There are no `.addr` spans in the HTML. Instead, `placeAddrs()` at the end of `sketch.js` creates `addrCount` (12) of them and scatters them at random in the white space, avoiding the cells and each other, and places them again whenever the window is resized. `.addr` in `style.css` makes them 32px black monospace text, positioned absolutely.
 
 ### `play.c` (rewritten)
 - Your original loop is preserved: `malloc(500000000)`, `step = 12345678`, and the cycling `&mem[i * step]` pointer.
