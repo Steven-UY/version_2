@@ -5,8 +5,12 @@
 #ifdef __EMSCRIPTEN__
 #include <emscripten.h>
 
-EM_JS(void, show, (const char *s), {
-    const el = document.getElementById("addr");
+EM_JS(int, slot_count, (void), {
+    return document.querySelectorAll(".addr").length;
+});
+
+EM_JS(void, show, (int k, const char *s), {
+    const el = document.querySelectorAll(".addr")[k];
     if (el) el.textContent = UTF8ToString(s);
 });
 #endif
@@ -19,8 +23,11 @@ static int i = 0;
 static void tick(void){
 #ifdef __EMSCRIPTEN__
     char buf[32];
-    snprintf(buf, sizeof buf, "%p", (void *)&mem[i * step]);
-    show(buf);
+    int slots = slot_count();
+    for (int k = 0; k < slots; k++){
+        snprintf(buf, sizeof buf, "%p", (void *)&mem[((i + k) % n) * step]);
+        show(k, buf);
+    }
 #else
     printf("\r%p", (void *)&mem[i * step]);
     fflush(stdout);

@@ -1,12 +1,16 @@
 //template function settings => instance
-const template = ({color, biteSize, wave, speed}) => (p) => {
+const template = ({color, biteSize, wave, speed}, cell) => (p) => {
 
   p.setup = () => {
-    p.createCanvas(200, 200);
+    p.createCanvas(cell.clientWidth, cell.clientHeight);
+  }
+
+  p.windowResized = () => {
+    p.resizeCanvas(cell.clientWidth, cell.clientHeight);
   }
 
   p.draw = () => {
-    p.background(0);
+    p.clear(); //transparent so the poem shows underneath
     p.fill(color)
     p.noStroke();
 
@@ -17,7 +21,8 @@ const template = ({color, biteSize, wave, speed}) => (p) => {
     let startAngle = biteSize * value;
     let endAngle = p.TWO_PI - startAngle; 
 
-    p.arc(p.width / 2, p.height / 2, 80, 80, startAngle, endAngle, p.CHORD);
+    let size = p.width * 0.4;
+    p.arc(p.width / 2, p.height / 2, size, size, startAngle, endAngle, p.CHORD);
   };
 };
 
@@ -26,10 +31,25 @@ const settings = [
     {color : "blue", biteSize: Math.PI / 10, speed: 0.05, wave: "sin"},
   ];
 
+const poem = [
+  "I’m craving caffeine injections;",
+  "and => (“binary_planes”) that jitter;",
+];
+const linesPerCell = 20;
+
 const cells = document.querySelectorAll(".cell");
 
 cells.forEach((cell, i) => {
-  new p5(template(settings[i % settings.length]), cell);
+  const text = document.createElement("div");
+  text.className = "poem";
+  for (let k = 0; k < linesPerCell; k++) {
+    const line = document.createElement("p");
+    line.textContent = poem[k % poem.length];
+    text.appendChild(line);
+  }
+  cell.appendChild(text);
+
+  new p5(template(settings[i % settings.length], cell), cell);
 });
 
 /*

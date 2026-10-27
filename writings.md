@@ -1,5 +1,5 @@
 ## Absorptions
-div injections, a utf, a yellow and brea ker. tan going in frames. changer in oscillations. in open ings.
+div injections, a utf, a yellow and breaker. tan going in frames. changer in oscillations. in open ings.
 
 instance sketch. circle to set and draw in fill. A silent way. Miles away.
 
